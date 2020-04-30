@@ -19,7 +19,10 @@ export default function Home() {
       </section>
 
       <Link to='/main'>
-        <button></button>
+        <button>baixar Livretos</button>
+      </Link>
+      <Link to='/login'>
+        <button>Sign in</button>
       </Link>
 
     </div>
