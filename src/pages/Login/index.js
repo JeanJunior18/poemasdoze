@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 export default function Authors() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [error, setError] = useState(false)
 
   async function handleSubmit(e){
     e.preventDefault()
@@ -14,13 +15,18 @@ export default function Authors() {
       password: Yup.string().required('Input your password'),
     })
     try{
-      await schema.validate({email, password})
-      console.log(email, password)   
+      schema.isValid({email, password}).then(valid=>{
+        if(valid)
+          console.log(email, password)
+        else
+          setError(!valid)
+      })
+      
     }catch(err){console.log(err)}
   }
-
   return (
     <div>
+      {error && <span>Email ou senha incorretos</span>}
       <form onSubmit={handleSubmit}>
         <label htmlFor="email">Email: </label>
         <input type="text" name="email" id="email" onChange={e=>setEmail(e.target.value)} />
