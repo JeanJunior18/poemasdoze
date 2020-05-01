@@ -8,7 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register'
 
 const PrivateRoute = ({component: Component, ...rest}) => (
-  <Route {...rest} render={props=>(
+  <Route {...rest} render={ props=>(
     isAuthenticated() ? (
       <Component {...props} />
     ) : (

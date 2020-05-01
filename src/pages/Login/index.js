@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import req from '../../api/axios'
 
 
 export default function Authors() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(false)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState(false);
+  const history = useHistory();
 
   async function handleSubmit(e){
     e.preventDefault()
@@ -18,25 +19,26 @@ export default function Authors() {
     try{
       schema.isValid({email, password}).then(async valid=>{
        if(valid){
-          console.log(email, password)
-          const {status, data} = await req.post('login', {email, password})
-          console.log(status, data)
-          if(true){
-            localStorage.setItem('authorization', data.token)
-            localStorage.setItem('user', `${data.user.firstname} ${data.user.lastname}` )
-            console.log('ok?')
-            return <Redirect to='/' />
+          const {status, data} = await req.post('/login', {email, password});
+          console.log(status, data);
+          if(!data.error){
+            localStorage.setItem('authorization', data.token);
+            localStorage.setItem('user', `${data.user.firstname} ${data.user.lastname}`);
+            history.push('/main');
+          }
+          else{
+            setError(data.error)
           }
         }
         else
-          setError(!valid)
+          setError('Usuário ou senha incorretos')
       })
       
     }catch(err){console.log(err)}
   }
   return (
     <div>
-      {error && <span>Email ou senha incorretos</span>} {/* Gera a mensagem de erro na tela */}
+      {error && <span>{error}</span>} {/* Gera a mensagem de erro na tela */}
       <form onSubmit={handleSubmit}>
 
         <label htmlFor="email">Email: </label>
