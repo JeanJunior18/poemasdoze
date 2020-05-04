@@ -22,7 +22,7 @@ export default function src() {
     <BrowserRouter>
         <Switch>
             <Route exact path='/' component={Home} />
-            <PrivateRoute exact path='/main' component={Main} />
+            <Route exact path='/main' component={Main} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
         </Switch>

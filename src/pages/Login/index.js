@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
-import req from '../../api/axios'
+import req from '../../api/axios';
+import Header from '../../components/header/index';
 
 
 export default function Authors() {
@@ -38,6 +39,9 @@ export default function Authors() {
   }
   return (
     <div>
+
+      <Header />
+
       {error && <span>{error}</span>} {/* Gera a mensagem de erro na tela */}
       <form onSubmit={handleSubmit}>
 

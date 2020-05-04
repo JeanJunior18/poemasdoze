@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import * as Yup from 'yup';
+import Header from '../../components/header/index';
 
 // import { Container } from './styles';
 
@@ -30,6 +31,8 @@ export default function Register() {
 
   return (
     <div>
+      <Header />
+
       <form onSubmit={handleSubmit}>
         <label htmlFor="firstname">Nome: </label>
         <input type="text" name="firstname" id="firstname" onChange={e=>setFirstname(e.target.value)} />

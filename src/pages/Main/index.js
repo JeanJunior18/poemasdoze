@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 
 import './style.css';
 
-import  Header from '../../components/header';
+import  Header from '../../components/header/index';
 
 export default function Main() {
 
