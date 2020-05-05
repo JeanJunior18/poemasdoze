@@ -181,7 +181,7 @@ img{
     align-self: center;
     justify-self: center;
 }
-button:hover {
+button.download:hover {
     color: #ff7f5000;
     background-image: url(http://poemasdoze.epizy.com/download1.png);
     background-repeat: no-repeat;    

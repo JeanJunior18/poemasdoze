@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import req from '../../api/axios';
 import Header from '../../components/header/index';
-
+import './styles.css';
 
 export default function Authors() {
   const [email, setEmail] = useState('');
@@ -13,48 +13,39 @@ export default function Authors() {
 
   async function handleSubmit(e){
     e.preventDefault()
+
     const schema = Yup.object().shape({
       email: Yup.string().email().required('Input your email'),
       password: Yup.string().required('Input your password'),
     })
-    try{
-      schema.isValid({email, password}).then(async valid=>{
-       if(valid){
-          const {status, data} = await req.post('/login', {email, password});
-          console.log(status, data);
-          if(!data.error){
-            localStorage.setItem('authorization', data.token);
-            localStorage.setItem('user', `${data.user.firstname} ${data.user.lastname}`);
-            history.push('/main');
-          }
-          else{
-            setError(data.error)
-          }
-        }
-        else
-          setError('Usuário ou senha incorretos')
-      })
-      
-    }catch(err){console.log(err)}
+    if(await schema.isValid({email, password})){
+      req.post('/login', {email, password}).then(response =>{
+          localStorage.setItem('authorization', response.data.token);
+          localStorage.setItem('user', `${response.data.user.firstname} ${response.data.user.lastname}`);
+          history.push('/main');
+      }).catch(error=>setError(error.response.data.error))
+    }
+    else setError('Usuário ou senha inválidos')
   }
   return (
-    <div>
+    <div className='login'>
 
       <Header />
 
-      {error && <span>{error}</span>} {/* Gera a mensagem de erro na tela */}
-      <form onSubmit={handleSubmit}>
+      <form className='box-login' onSubmit={handleSubmit}>
+        <div className="login-screen">
+          <h2>Login</h2>
+          {error && <span className="error">{error}</span>}
+          {/* <label htmlFor="email">Email: </label> */}
+          <input placeholder='Email' type="text" name="email" id="email" onChange={e=>setEmail(e.target.value)} />
 
-        <label htmlFor="email">Email: </label>
-        <input type="text" name="email" id="email" onChange={e=>setEmail(e.target.value)} />
+          {/* <label htmlFor="password">Password: </label> */}
+          <input placeholder='Password' type="password" name="password" id="password" onChange={e=>setPassword(e.target.value)} />
 
-        <label htmlFor="password">Password: </label>
-        <input type="password" name="password" id="password" onChange={e=>setPassword(e.target.value)} />
+          <button type="submit">Entrar</button>
 
-        <input type="submit" value="Enviar"/>
-
-        <Link to='/register'>Registre-se!</Link>
-
+          <Link to='/register'>Ainda não é cadastrado? Registre-se!</Link>
+          </div>
       </form>
     </div>
   );

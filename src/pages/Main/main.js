@@ -65,7 +65,7 @@ export default function Main() {
 			<div className="content">
         {booklests.map(book=>(<div key={book.title}>
           <img src={book.imgLink} alt="Capa do Livro"/>
-        <button><p>"{book.title}"</p><p>{book.author}</p></button>
+        <button className="download"><p>"{book.title}"</p><p>{book.author}</p></button>
         </div>))}
       </div>
 
