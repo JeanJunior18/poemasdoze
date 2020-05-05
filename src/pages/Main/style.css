@@ -158,3 +158,34 @@ footer {
     grid-area: f;
     text-decoration: unset;
 } */
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 0 auto;
+}
+img{
+    display: block;
+    max-width: 100%;
+}
+.content > div {
+    flex: 1 1 200px;
+    margin: 20px;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.content div button {
+    max-width: 100%;   
+    align-self: center;
+    justify-self: center;
+}
+button:hover {
+    color: #ff7f5000;
+    background-image: url(http://poemasdoze.epizy.com/download1.png);
+    background-repeat: no-repeat;    
+    background-position: center;
+    /* box-shadow: 0 5px 0 #ee8761; */
+    transition-duration: 200ms;
+}

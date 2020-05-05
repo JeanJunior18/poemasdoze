@@ -1,48 +1,34 @@
-import React from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useEffect } from 'react';
 
-import './style.css';
+import Header from '../../components/header/index';
+import Main from './main';
+import { useState } from 'react';
 
-import  Header from '../../components/header/index';
 
-export default function Main() {
+function EmailVerify() {
 
-    const booklests = [
-        {
-            title: 'Tudo que eu não disse',
-            author: 'Zé Lucas',
-            imgLink: 'http://poemasdoze.epizy.com/Livreto_tudo%20o%20que%20eu%20n%C3%A3o%20disse.png',
-            downloadLink: 'https://bit.ly/download_tudooqueeunaodisse'
-        },
-        {
-            title: 'Cordel da roça encantanda',
-            author: 'Zé Lucas',
-            imgLink: 'http://poemasdoze.epizy.com/Cordel_da_roca_encantada.png',
-            downloadLink: 'https://bit.ly/download_rocaencantada'
-            
-        }
-    ];
-    const user = localStorage.getItem('user')
-    const history = useHistory();
-    function logout(){
-      localStorage.clear()
-      history.push('/')
-    }
-  return (
-		<div>
-			<Header/>
-			<div className='container'>
-				<div className='corpo'> 
-                    <section><p>Olá {user}, sejá bem vindo!</p></section><br/><br/><br/>
-                    <button onClick={logout}> <p>Logout</p> </button>
-					{booklests.map(book=>(
-					<div className="btn" key={book.title}>
-					<img src={book.imgLink} alt="Capa do Livro"/>
-					<a href={book.downloadLink}><button>Baixar<br/>"Tudo o que eu não disse"</button></a>
-					</div>
-					))}
-				</div>
-			</div>
-		</div>
-  );
+  const [haveEmail, setHaveEmail] = useState(false);
+  const [email, setEmail] = useState('');
+
+  useEffect(()=>{
+    const verify = localStorage.getItem('email');
+    console.log('Eviar email para o mail trap')
+
+    if(verify) setHaveEmail(true);
+  });
+  return (<>
+    <Header/>
+
+    {haveEmail && <Main/>}
+    {!haveEmail && <>
+      <form onSubmit={()=>localStorage.setItem('email', email)}>
+        <label htmlFor="email">Cadastre o seu email para baixar gratuitamente os livretos</label>
+        <input type="email" placeholder='Digite o seu email' onChange={e => setEmail(e.target.value)}/>
+        <input type="submit" value="Cadastrar" />
+      </form>
+    </>}
+    
+  </>);
 }
+
+export default EmailVerify; 
