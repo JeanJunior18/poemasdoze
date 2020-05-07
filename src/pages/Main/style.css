@@ -175,17 +175,62 @@ img{
     align-items: center;
     align-content: center;
     justify-content: center;
+    background-color: #7f8fa6;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
 }
-.content div button {
+div.download {
     max-width: 100%;   
+    text-align: center;
     align-self: center;
-    justify-self: center;
+    justify-self: start;
+    margin-top: 0;
+
 }
-button.download:hover {
+/* div.download:hover {
     color: #ff7f5000;
     background-image: url(http://poemasdoze.epizy.com/download1.png);
     background-repeat: no-repeat;    
     background-position: center;
-    /* box-shadow: 0 5px 0 #ee8761; */
+    box-shadow: 0 5px 0 #ee8761;
     transition-duration: 200ms;
+} */
+.getEmail{
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    background-color: #718093;
+    padding: 30px;
+    border-radius: 10px;
+    color: white;
+    text-align: center
+    
+}
+form label {
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+form input[type=email] {
+    margin: auto;
+    width: 400px;
+    height: 30px;
+    border-radius: 10px;
+    border: transparent;
+    text-align: center;
+    font-size: 17px;
+}
+form input[type=submit]{
+    margin: 20px auto 0;
+    padding: 10px;
+    width: 200px;
+    border: transparent;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+form input[type=submit]:hover{
+    background-color: #273c75;
+    color: white;
 }

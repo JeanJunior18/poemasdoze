@@ -21,7 +21,7 @@ function EmailVerify() {
 
     {haveEmail && <Main/>}
     {!haveEmail && <>
-      <form onSubmit={()=>localStorage.setItem('email', email)}>
+      <form className='getEmail' onSubmit={()=>localStorage.setItem('email', email)}>
         <label htmlFor="email">Cadastre o seu email para baixar gratuitamente os livretos</label>
         <input type="email" placeholder='Digite o seu email' onChange={e => setEmail(e.target.value)}/>
         <input type="submit" value="Cadastrar" />
