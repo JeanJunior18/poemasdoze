@@ -5,6 +5,7 @@ header {
     background-color: #2f3640;
     color: white;
     font-family: 'Oswald';
+    height: 100px;
 }
 header h1 {
     margin-top: 43px;
